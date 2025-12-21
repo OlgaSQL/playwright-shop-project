@@ -4,12 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.56.1"
-  }
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.3"
+  },
+  "dependencies": {
+    "playwright": "^1.56.1",
+    "playwright-core": "^1.56.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OlgaSQL/Playwright-pet-project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OlgaSQL/Playwright-pet-project/issues"
+  },
+  "homepage": "https://github.com/OlgaSQL/Playwright-pet-project#readme"
 }
