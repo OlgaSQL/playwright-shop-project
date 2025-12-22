@@ -1,0 +1,37 @@
+name: Trigger E2E Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      test-suite:
+        description: "Specify the test suite to run"
+        required: true
+        type: choice
+        options:
+          - full
+          - sanity
+          - regression
+          - smoke
+
+      test-env:
+        description: "Specify the test environment name"
+        required: true
+        type: choice
+        options:
+          - DEV
+          - QA
+          - PROD
+
+      version:
+        description: "Specify the application version"
+        required: false
+        type: string
+
+jobs:
+  trigger-playwright-tests:
+    uses: ./.github/workflows/playwright.yml
+    with:
+      test-suite: ${{ github.event.inputs.test-suite }}
+      test-env: ${{ github.event.inputs.test-env }}
+      version: ${{ github.event.inputs.version }}
+    secrets: inherit
