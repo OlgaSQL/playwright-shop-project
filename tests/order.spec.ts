@@ -5,7 +5,7 @@ import { fakeUser } from "./testData/userInfo";
 import NavigateItemPage from "./customCommands/navigateItemPage";
 import { ItemPage } from "./fixtures/ItemPage";
 import { CardPage } from "./fixtures/CardPage";
-import { OrderPage } from "./fixtures/orderPage";
+import { OrderPage } from "./fixtures/OrderPage";
 
 test.describe("User ", () => {
   test.beforeEach(async ({ page }) => {
