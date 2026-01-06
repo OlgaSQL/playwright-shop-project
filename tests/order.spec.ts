@@ -1,4 +1,4 @@
-import test, { expect } from "playwright/test";
+import test from "playwright/test";
 import navigateHomePage from "./customCommands/navigateHomePage";
 import { items } from "./testData/items";
 import { fakeUser } from "./testData/userInfo";
