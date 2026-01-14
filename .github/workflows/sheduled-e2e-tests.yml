@@ -1,11 +1,14 @@
 name: Scheduled E2E Tests
+
 on:
   schedule:
-    - cron: "0 6 * * 1-5" # Weekdays (Mon–Fri) at 06:00
+    - cron: "0 2 * * *" # Runs daily at 2 AM UTC
+
 jobs:
-  trigger-playwright-tests:
+  scheduled-playwright-tests:
     uses: ./.github/workflows/playwright.yml
     with:
-      test-suite: "PROD"
-
+      test-suite: regression
+      test-env: DEV
+      version: latest
     secrets: inherit

@@ -1,69 +1,49 @@
-name: Playwright Tests
+name: Playwright Reusable Tests
+
 on:
   workflow_call:
     inputs:
       test-suite:
-        required: true
         type: string
-      test-env:
-        required: true
-        type: string
-      version:
         required: false
-        type: string
-  push:
-    branches: [main]
-
-  pull_request:
-    branches: [main]
-
-  schedule:
-    - cron: "0 4 * * 1-5" # Weekdays (Mon–Fri) at 04:00
-
-  workflow_dispatch:
-    inputs:
-      test-suite:
-        description: "Specify the test suite to run"
-        required: true
-        type: choice
-        options:
-          - full
-          - sanity
-          - regression
+        default: regression
 
       test-env:
-        description: "Specify the test environment name"
-        required: true
-        type: choice
-        options:
-          - DEV
-          - QA
-          - PROD
+        type: string
+        required: false
+        default: DEV
 
       version:
-        description: "Specify the application version"
-        required: false
         type: string
+        required: false
 
 jobs:
   test:
-    timeout-minutes: 60
     runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    env:
+      TEST_ENV: ${{ inputs.test-env }}
+      TEST_SUITE: ${{ inputs.test-suite }}
 
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+
       - name: Install dependencies
         run: npm ci
-      - name: Install Playwright Browsers
+
+      - name: Install Playwright browsers
         run: npx playwright install --with-deps
+
       - name: Run Playwright tests
         run: npx playwright test
+
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30
