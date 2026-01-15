@@ -1,18 +1,13 @@
-import { test } from "@playwright/test";
-import navigateHomePage from "./customCommands/navigateHomePage";
+import { test } from "../fixtures/homePageFixture";
 import { items } from "./testData/items";
 import navigateCardPage from "./customCommands/navigateCardPage";
-import { CardPage } from "./fixtures/CardPage";
+import { CardPage } from "../pages/CardPage";
 import navigateItemPage from "./customCommands/navigateItemPage";
-import { ItemPage } from "./fixtures/ItemPage";
+import { ItemPage } from "../pages/ItemPage";
 import navigateSection from "./customCommands/navigateSection";
 import { sections } from "./testData/sections";
 
 test.describe("User", () => {
-  test.beforeEach(async ({ page }) => {
-    await navigateHomePage(page);
-  });
-
   test(" can add few items to the basket and next delete them", async ({
     page,
   }) => {

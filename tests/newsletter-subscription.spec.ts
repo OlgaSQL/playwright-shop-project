@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import navigateHomePage from "./customCommands/navigateHomePage";
 import { faker } from "@faker-js/faker/locale/af_ZA";
+import navigateHomePage from "./customCommands/navigateHomePage";
 
 test.describe("User ", () => {
   test.beforeEach(async ({ page }) => {

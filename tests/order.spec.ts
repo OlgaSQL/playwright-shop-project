@@ -1,24 +1,18 @@
-import test from "playwright/test";
-import navigateHomePage from "./customCommands/navigateHomePage";
+import { test } from "../fixtures/homePageFixture";
 import { items } from "./testData/items";
 import { fakeUser } from "./testData/userInfo";
-import NavigateItemPage from "./customCommands/navigateItemPage";
-import { ItemPage } from "./fixtures/ItemPage";
-import { CardPage } from "./fixtures/CardPage";
-import { OrderPage } from "./fixtures/OrderPage";
+import navigateItemPage from "./customCommands/navigateItemPage";
+import { ItemPage } from "../pages/ItemPage";
+import { CardPage } from "../pages/CardPage";
+import { OrderPage } from "../pages/OrderPage";
 
 test.describe("User ", () => {
-  test.beforeEach(async ({ page }) => {
-    navigateHomePage(page);
-  });
-
   test("can order item", async ({ page }) => {
     const itemPage = new ItemPage(page);
     const cardPage = new CardPage(page);
     const orderPage = new OrderPage(page);
-
     // Navigate to item page and add item to cart and proceed to checkout
-    await NavigateItemPage(page, items[0].itemsName);
+    await navigateItemPage(page, items[0].itemsName);
     await itemPage.addItemToCart();
     await itemPage.processToCheckout();
     await cardPage.processToCheckout();

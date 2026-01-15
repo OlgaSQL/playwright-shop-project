@@ -1,12 +1,15 @@
-import { expect, test } from "@playwright/test";
-import navigateHomePage from "./customCommands/navigateHomePage";
-import { LoginPage } from "./fixtures/LoginPage";
+import { test, expect } from "../fixtures/homePageFixture";
+import { LoginPage } from "../pages/LoginPage";
 import { INVALID_USER, VALID_USER } from "./testData/userCredentials";
 import navigateLoginPage from "./customCommands/navigateLoginPage";
 
 test.describe("User ", () => {
   test.beforeEach(async ({ page }) => {
-    await navigateHomePage(page);
+    await page.context().clearCookies();
+    await page.evaluate(() => {
+      localStorage.clear();
+      sessionStorage.clear();
+    });
     await navigateLoginPage(page);
   });
 
@@ -15,7 +18,7 @@ test.describe("User ", () => {
     await loginPage.fillEmail(VALID_USER.email);
     await loginPage.fillPassword(VALID_USER.password);
     await loginPage.clickSignInButton();
-    // Assertion: user logged in
+
     await expect(page.getByTitle("View my customer account")).toBeVisible();
     await expect(page.locator(".logout")).toBeVisible();
   });
@@ -25,7 +28,7 @@ test.describe("User ", () => {
     await loginPage.fillEmail(INVALID_USER.email);
     await loginPage.fillPassword(INVALID_USER.password);
     await loginPage.clickSignInButton();
-    // Assertion: error message is displayed
+
     await expect(
       page.locator("ul li:has-text('Authentication failed.')")
     ).toBeVisible();
