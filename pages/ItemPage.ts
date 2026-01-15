@@ -1,8 +1,8 @@
 import { expect } from "@playwright/test";
 
 export class ItemPage {
-  page: any;
-  constructor(page: any) {
+  page;
+  constructor(page) {
     this.page = page;
   }
 
@@ -10,7 +10,7 @@ export class ItemPage {
     await this.page.getByRole("button", { name: "Add to cart" }).click();
   }
 
-  async verifyItemDetails(item: { title: string; price: string }) {
+  async verifyItemDetails(item) {
     await expect(
       this.page.getByRole("heading", {
         name: item.title,

@@ -1,10 +1,10 @@
 import { test } from "../fixtures/homePageFixture";
 import { items } from "./testData/items";
 import { fakeUser } from "./testData/userInfo";
-import navigateItemPage from "./customCommands/navigateItemPage";
-import { ItemPage } from "../pages/ItemPage";
 import { CardPage } from "../pages/CardPage";
+import { ItemPage } from "../pages/ItemPage";
 import { OrderPage } from "../pages/OrderPage";
+import navigateItemPage from "./customCommands/navigateItemPage";
 
 test.describe("User ", () => {
   test("can order item", async ({ page }) => {

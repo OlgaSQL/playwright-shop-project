@@ -1,15 +1,16 @@
 import { expect } from "@playwright/test";
 
 export class CardPage {
+  page: any;
+  constructor(page: any) {
+    this.page = page;
+  }
+
   pressContinueShopping() {
     throw new Error("Method not implemented.");
   }
   addItemToCart() {
     throw new Error("Method not implemented.");
-  }
-  page: any;
-  constructor(page: any) {
-    this.page = page;
   }
 
   async verifyProductInCart(productName: string) {
